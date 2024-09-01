@@ -5,7 +5,6 @@ const app = express();
 
 async function startServer() {
   try {
-    // Create the connection to the database
     const connection = mysql.createPool({
       host: "localhost",
       user: "root",
@@ -19,15 +18,15 @@ async function startServer() {
       enableKeepAlive: true,
       keepAliveInitialDelay: 0,
     });
-    const startTime = new Date().getTime(); // Get the start time in milliseconds
+    const startTime = new Date().getTime();
 
-    //
+    //TODO: use column name instead of selecting all
     const [results] = await connection.query(
       "SELECT * FROM roles WHERE role = 'Diana'"
     );
 
-    const endTime = new Date().getTime(); // Get the end time in milliseconds
-    const timeTaken = endTime - startTime; // Calculate the time taken
+    const endTime = new Date().getTime();
+    const timeTaken = endTime - startTime;
     console.log(`Query executed in ${timeTaken} ms`);
 
     app.listen(5000, () => {
